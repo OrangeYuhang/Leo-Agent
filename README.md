@@ -42,16 +42,16 @@
 │   ├── api/v1/                  # 路由层
 │   │   ├── chat.py              # 聊天端点(现有,待 M2 实现)
 │   │   ├── oss.py               # OSS 预签名(现有,计划 M5 移除)
-│   │   ├── knowledge.py         # 🆕 知识库上传/列表/删除
-│   │   ├── uploads.py           # 🆕 本地上传(替换 OSS)
-│   │   └── tasks.py             # 🆕 待办/提醒 CRUD
+│   │   ├── knowledge.py         # 知识库上传/列表/删除
+│   │   ├── uploads.py           # 本地上传(替换 OSS)
+│   │   └── tasks.py             # 待办/提醒 CRUD
 │   ├── agent/                   # 编排层(薄)
 │   │   ├── tools.py             # 现有工具(计划 M0 拆分)
 │   │   ├── middlewares.py       # 现有(空)
-│   │   ├── agent_factory.py     # 🆕 create_agent 组装
-│   │   ├── skills_loader.py     # 🆕 skills 扫描注册
-│   │   └── tools/               # 🆕 按域拆分:knowledge/web/system/coding/memory
-│   ├── services/                # 🆕 服务层(厚)
+│   │   ├── agent_factory.py     # create_agent 组装
+│   │   ├── skills_loader.py     # skills 扫描注册
+│   │   └── tools/               # 按域拆分:knowledge/web/system/coding/memory
+│   ├── services/                # 服务层(厚)
 │   │   ├── memory_service.py    # 长期记忆流水线
 │   │   ├── history_service.py   # sqlite 会话历史
 │   │   ├── scheduler.py         # APScheduler 提醒调度
@@ -65,10 +65,10 @@
 │   │   ├── history/             # 现有:会话记忆(空)
 │   │   ├── prompts/             # 现有:system/summarise prompt
 │   │   ├── md5.txt              # 现有:入库去重清单
-│   │   ├── uploads/             # 🆕 上传文件存储
-│   │   └── workspace/           # 🆕 文件工具白名单目录
+│   │   ├── uploads/             # 上传文件存储
+│   │   └── workspace/           # 文件工具白名单目录
 │   ├── skills/                  # 现有(空):技能目录,M4 落示例 skill
-│   ├── tests/                   # 🆕 pytest 测试
+│   ├── tests/                   # pytest 测试
 │   └── static/                  # 教程残留占位(将被前端构建产物替换)
 ├── frontend/                    # React 模板(现有,尚未对接后端)
 ├── docs/
