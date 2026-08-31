@@ -1,0 +1,39 @@
+{
+  "agent": {
+    "model": "qwen3.5-plus",
+    "model_provider": "openai",
+    "memory_path": "./resource/history/LEO.db"
+  },
+  "rag": {
+    "embedding_model": "",
+    "summarise_model": "",
+    "chroma": {
+      "collection_name": "agent",
+      "persist_directory": "/resource/chroma_db",
+      "k": 3,
+      "data_path": "data",
+      "md5_hex_store": "./resource/md5.text",
+      "allowed_knowledge_file_types": ["txt", "pdf"],
+      "chunk_size": 500,
+      "chunk_overlap": 20,
+      "separators": [
+        "\n\n",
+        "\n",
+        " ",
+        "\t",
+        "\r",
+        "!",
+        "?",
+        ".",
+        "。",
+        "，",
+        "！",
+        "？"
+      ]
+    }
+  },
+  "prompts": {
+    "system_prompt_path": "/resource/prompts/system_prompt.txt",
+    "summarize_prompt_path": "/resource/prompts/summarize_prompt.txt"
+  }
+}

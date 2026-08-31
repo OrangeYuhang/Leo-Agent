@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram id="leo-arch-v1" name="LEO Agent 架构图">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1760" pageHeight="1120" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- 标题 -->
+        <mxCell id="title" value="LEO Agent — 后端整体架构(v1)" style="text;html=1;fontSize=16;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="8" width="600" height="34" as="geometry" />
+        </mxCell>
+
+        <!-- ============ 前端层 ============ -->
+        <mxCell id="fe" value="前端 — 多模块仪表盘(本轮不实现)" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=13;spacingTop=6;spacingLeft=8;fillColor=#fffdf0;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="40" y="60" width="1360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="fe-chat" value="聊天模块" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="fe">
+          <mxGeometry x="20" y="45" width="280" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="fe-kb" value="知识库管理" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="fe">
+          <mxGeometry x="340" y="45" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="fe-tasks" value="任务与提醒" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="fe">
+          <mxGeometry x="620" y="45" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="fe-settings" value="设置" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="fe">
+          <mxGeometry x="900" y="45" width="160" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="fe-note" value="本轮不实现&#10;API 契约见 spec §7" style="text;html=1;fontSize=11;fontColor=#808080;align=center;verticalAlign=middle;" vertex="1" parent="fe">
+          <mxGeometry x="1120" y="45" width="220" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ============ API 层 ============ -->
+        <mxCell id="api" value="FastAPI — api/v1/" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=13;spacingTop=6;spacingLeft=8;fillColor=#f4f9ff;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="250" width="1360" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="api-chat" value="chat.py&#10;POST /chat/stream (SSE)&#10;GET/DELETE /chat/messages" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="api">
+          <mxGeometry x="20" y="45" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="api-knowledge" value="knowledge.py&#10;上传 / 列表 / 删除" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="api">
+          <mxGeometry x="360" y="45" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="api-uploads" value="uploads.py&#10;本地上传(替代 OSS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="api">
+          <mxGeometry x="680" y="45" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="api-tasks" value="tasks.py&#10;待办 / 提醒 CRUD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="api">
+          <mxGeometry x="960" y="45" width="320" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ============ 编排层 ============ -->
+        <mxCell id="agent" value="agent/ — 编排层(薄)" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=13;spacingTop=6;spacingLeft=8;fillColor=#faf6fc;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="40" y="460" width="1360" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="agent-loader" value="skills_loader.py&#10;启动扫描 skills/ 注册" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="agent">
+          <mxGeometry x="20" y="45" width="260" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="agent-factory" value="agent_factory.py&#10;create_agent(DeepSeek)&#10;人设 + skill 说明 + 工具" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="agent">
+          <mxGeometry x="320" y="45" width="380" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="agent-tools" value="tools/ 内置工具&#10;知识库 / 网络 / 系统 / 编码 / 记忆" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="agent">
+          <mxGeometry x="740" y="45" width="320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="agent-skills" value="backend/skills/&#10;SKILL.md + tools.py&#10;(自包含技能目录)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#f5f5f5;strokeColor=#9673a6;fontSize=11;fontColor=#666666;" vertex="1" parent="agent">
+          <mxGeometry x="1100" y="45" width="240" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- ============ 服务层 ============ -->
+        <mxCell id="services" value="services/ — 服务层(厚)" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=13;spacingTop=6;spacingLeft=8;fillColor=#f6fbf5;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="680" width="1360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-rag" value="rag/&#10;知识库检索+总结" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="services">
+          <mxGeometry x="20" y="45" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-memory" value="memory_service.py&#10;长期记忆流水线" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="services">
+          <mxGeometry x="236" y="45" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-history" value="history_service.py&#10;sqlite 会话历史" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="services">
+          <mxGeometry x="452" y="45" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-scheduler" value="scheduler.py&#10;APScheduler 提醒调度" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="services">
+          <mxGeometry x="668" y="45" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-system" value="system_service.py&#10;psutil / 白名单文件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="services">
+          <mxGeometry x="884" y="45" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-code" value="code_service.py&#10;只读代码仓库" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="services">
+          <mxGeometry x="1100" y="45" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ============ 数据层 ============ -->
+        <mxCell id="resource" value="resource/ — 数据层" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=13;spacingTop=6;spacingLeft=8;fillColor=#fff7ee;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="40" y="890" width="1360" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="res-chroma" value="Chroma&#10;knowledge + memory" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="resource">
+          <mxGeometry x="20" y="45" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="res-sqlite" value="SQLite history.db&#10;threads / messages&#10;todos / reminders" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="resource">
+          <mxGeometry x="300" y="45" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="res-uploads" value="uploads/&#10;图片与文件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="resource">
+          <mxGeometry x="580" y="45" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="res-workspace" value="workspace/&#10;文件工具白名单" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="resource">
+          <mxGeometry x="820" y="45" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="res-prompts" value="prompts/*.txt&#10;md5.txt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="resource">
+          <mxGeometry x="1060" y="45" width="240" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ============ 外部依赖 ============ -->
+        <mxCell id="externals" value="外部依赖 / 本机" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=13;spacingTop=6;spacingLeft=8;fillColor=#fff5f5;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="440" width="260" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="ext-deepseek" value="DeepSeek API&#10;deepseek-chat(主模型)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="externals">
+          <mxGeometry x="20" y="40" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ext-tavily" value="Tavily API&#10;网络搜索" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="externals">
+          <mxGeometry x="20" y="160" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ext-dashscope" value="DashScope&#10;text-embedding-v3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="externals">
+          <mxGeometry x="20" y="260" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ext-local" value="本地系统&#10;psutil / notify-send" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="externals">
+          <mxGeometry x="20" y="360" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ============ 主链路(实线,纵向) ============ -->
+        <mxCell id="e1" value="HTTP / SSE" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#444444;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="fe" target="api">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="180" as="sourcePoint" />
+            <mxPoint x="720" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="对话链路" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#444444;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="api" target="agent">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="390" as="sourcePoint" />
+            <mxPoint x="720" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="工具调用" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#444444;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="agent" target="services">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="620" as="sourcePoint" />
+            <mxPoint x="720" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="读写" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#444444;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="services" target="resource">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="720" y="830" as="sourcePoint" />
+            <mxPoint x="720" y="890" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 管理链路(虚线,绕过编排层) -->
+        <mxCell id="e5" value="管理链路(不经 agent)" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;dashed=1;dashPattern=8 8;strokeColor=#9673a6;fontSize=10;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="api" target="services">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="12" y="320" />
+              <mxPoint x="12" y="755" />
+            </Array>
+            <mxPoint x="40" y="320" as="sourcePoint" />
+            <mxPoint x="40" y="755" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- skills 注册(编排层内部,相对坐标) -->
+        <mxCell id="e6" value="启动扫描注册" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;dashed=1;dashPattern=8 8;strokeColor=#9673a6;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;entryX=0.5;entryY=0;" edge="1" parent="agent" source="agent-skills" target="agent-loader">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1220" y="25" />
+              <mxPoint x="150" y="25" />
+            </Array>
+            <mxPoint x="1220" y="45" as="sourcePoint" />
+            <mxPoint x="150" y="45" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 模型调用:agent_factory → DeepSeek -->
+        <mxCell id="e7" value="模型调用 / 流式返回" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#444444;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;entryX=0;entryY=0.5;" edge="1" parent="1" source="agent-factory" target="ext-deepseek">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="550" y="480" />
+              <mxPoint x="1455" y="480" />
+              <mxPoint x="1455" y="520" />
+            </Array>
+            <mxPoint x="550" y="505" as="sourcePoint" />
+            <mxPoint x="1490" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- web_search:tools → Tavily -->
+        <mxCell id="e8" value="web_search" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#444444;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;entryX=0;entryY=0.5;" edge="1" parent="1" source="agent-tools" target="ext-tavily">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="495" />
+              <mxPoint x="1460" y="495" />
+              <mxPoint x="1460" y="640" />
+            </Array>
+            <mxPoint x="940" y="505" as="sourcePoint" />
+            <mxPoint x="1490" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 记忆抽取:services → DeepSeek -->
+        <mxCell id="e9" value="记忆抽取(对话后)" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;dashed=1;dashPattern=8 8;strokeColor=#444444;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.25;entryX=0;entryY=0.85;" edge="1" parent="1" source="services" target="ext-deepseek">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1455" y="717" />
+              <mxPoint x="1455" y="548" />
+            </Array>
+            <mxPoint x="1400" y="717" as="sourcePoint" />
+            <mxPoint x="1490" y="548" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- embedding:rag → DashScope -->
+        <mxCell id="e10" value="embedding" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#444444;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="svc-rag" target="ext-dashscope">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="860" />
+              <mxPoint x="1455" y="860" />
+              <mxPoint x="1455" y="740" />
+            </Array>
+            <mxPoint x="160" y="805" as="sourcePoint" />
+            <mxPoint x="1490" y="740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- psutil:system_service → 本地系统 -->
+        <mxCell id="e11" value="psutil" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;strokeColor=#444444;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="svc-system" target="ext-local">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1465" y="765" />
+              <mxPoint x="1465" y="850" />
+            </Array>
+            <mxPoint x="1124" y="765" as="sourcePoint" />
+            <mxPoint x="1490" y="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- notify-send:scheduler → 本地系统 -->
+        <mxCell id="e12" value="notify-send" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;endArrow=block;endFill=1;dashed=1;dashPattern=8 8;strokeColor=#444444;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.75;entryX=0;entryY=0.75;" edge="1" parent="1" source="svc-scheduler" target="ext-local">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1473" y="785" />
+              <mxPoint x="1473" y="860" />
+            </Array>
+            <mxPoint x="908" y="785" as="sourcePoint" />
+            <mxPoint x="1490" y="860" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
